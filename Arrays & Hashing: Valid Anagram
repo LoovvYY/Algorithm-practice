@@ -1,0 +1,38 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        Map<Character, Integer> timesMap = new HashMap<>();
+        if(!(s.length() == t.length())){
+            return false;
+        }
+        for(int i =0; i< s.length(); i++){
+            char oneTocken = s.charAt(i);
+            if(timesMap. containsKey(oneTocken)){
+                int times = timesMap.get(oneTocken);
+                times++;
+                timesMap.put(oneTocken, times);
+            }else{
+                timesMap.put(oneTocken,1);
+            }
+        }
+        for(int i =0; i< t.length(); i++){
+            char oneChar = t.charAt(i);
+            if(timesMap.containsKey(oneChar)){
+                int times = timesMap.get(oneChar);
+                times--;
+                if(times == 0){
+                    timesMap.remove(oneChar);
+                }else{
+                    timesMap.put(oneChar, times);
+                }
+            }else{
+                return false;
+            }
+        }
+
+        if(timesMap.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
